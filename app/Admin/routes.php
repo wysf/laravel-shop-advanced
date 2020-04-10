@@ -26,4 +26,8 @@ Route::group([
     $router->get('coupon_codes/{id}/edit', 'CouponCodesController@edit');
     $router->put('coupon_codes/{id}', 'CouponCodesController@update');
     $router->delete('coupon_codes/{id}', 'CouponCodesController@destroy');
+    //商品类目
+    $router->resource('categories', CategoriesController::class);
+    //下拉框类目搜索
+    $router->get('api/categories', 'CategoriesController@apiIndex');
 });
