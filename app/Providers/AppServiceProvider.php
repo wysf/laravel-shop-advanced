@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
             $config['return_url'] = route('payment.alipay.return');
             // 判断当前项目运行环境是否为线上环境
             if (app()->environment() !== 'production') {
-                $config['mode']         = 'dev';
+                $config['mode'] = 'dev';
                 $config['log']['level'] = Logger::DEBUG;
             } else {
                 $config['log']['level'] = Logger::WARNING;
@@ -42,9 +42,7 @@ class AppServiceProvider extends ServiceProvider
             // 调用 Yansongda\Pay 来创建一个微信支付对象
             return Pay::wechat($config);
         });
-        // 当 Laravel 渲染 products.index 和 products.show 模板时，就会使用 CategoryTreeComposer 这个来注入类目树变量
-        // 同时 Laravel 还支持通配符，例如 products.* 即代表当渲染 products 目录下的模板时都执行这个 ViewComposer
-        \Illuminate\View\View::composer(['products.index', 'products.show'], \App\Http\ViewComposers\CategoryTreeComposer::class);
+
     }
 
     /**
@@ -54,6 +52,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // 当 Laravel 渲染 products.index 和 products.show 模板时，就会使用 CategoryTreeComposer 这个来注入类目树变量
+        // 同时 Laravel 还支持通配符，例如 products.* 即代表当渲染 products 目录下的模板时都执行这个 ViewComposer
+        \Illuminate\Support\Facades\View::composer(['products.index', 'products.show'], \App\Http\ViewComposers\CategoryTreeComposer::class);
     }
 }
