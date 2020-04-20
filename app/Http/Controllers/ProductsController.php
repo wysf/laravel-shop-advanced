@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
+
+
+
     public function index(Request $request)
     {
         // 创建一个查询构造器

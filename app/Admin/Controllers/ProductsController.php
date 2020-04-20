@@ -16,7 +16,7 @@ class ProductsController extends AdminController
      *
      * @var string
      */
-    protected $title = '商品';
+    protected $title = '普通商品';
 
     /**
      * Make a grid builder.
@@ -27,7 +27,7 @@ class ProductsController extends AdminController
     {
         $grid = new Grid(new Product);
         // 使用 with 来预加载商品类目数据，减少 SQL 查询
-        $grid->model()->with('category');
+        $grid->model()->where('type',Product::TYPE_NORMAL)->with('category');
 
         $grid->id('ID')->sortable();
         $grid->title('商品名称');
